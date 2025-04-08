@@ -37,6 +37,8 @@ function Signin({setUser , setIsLoggedIn} : signin){
 
     const navigate = useNavigate();
 
+    const api = import.meta.env.VITE_API_URL;
+
 
     const passwordRef = useRef<HTMLInputElement>(null);
     const emailRef = useRef<HTMLInputElement>(null);
@@ -75,7 +77,7 @@ function Signin({setUser , setIsLoggedIn} : signin){
                 setIsLoading(s => !s);
                 let res;
                 try {
-                    res = await axios.post("http://localhost:3000/api/v1/user/signin", {
+                    res = await axios.post(`${api}/api/v1/user/signin`, {
                         email,
                         password,
                     });

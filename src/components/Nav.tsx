@@ -79,7 +79,8 @@ function Navbar({user , setUser, isLoggedIn , setIsLoggedIn} : nav){
                     title: "sucess",
                     text : "Sign out Sucessfully...",
                     icon: "success",
-                    confirmButtonText: "OK"
+                    confirmButtonText: "OK",
+                    timer: 3000
                 });
             }
         })

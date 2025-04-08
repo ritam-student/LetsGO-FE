@@ -64,6 +64,7 @@ interface data{
 
 function Hostel(){
 
+    const api = import.meta.env.VITE_API_URL;
     const [roomDetails , setRoomDetails] = useState<data[] | null>(null);
     const timer = useRef(0);
     const searchRef = useRef<HTMLInputElement>(null);
@@ -72,7 +73,7 @@ function Hostel(){
     async function mainFun(val: string){
         
         try{
-            const res = await axios.get(`http://localhost:3000/api/v1/room/searchFromHostel?query=${val}`);
+            const res = await axios.get(`${api}/api/v1/room/searchFromHostel?query=${val}`);
             console.log(res.data);
             console.log(res.data.data);
             setRoomDetails(res.data.data);
@@ -94,7 +95,7 @@ function Hostel(){
         setIsLoading(true);
         const val = searchRef.current?.value;
         try{
-            const res = await axios.get(`http://localhost:3000/api/v1/room/searchFromHostel?query=${val}`);
+            const res = await axios.get(`${api}/api/v1/room/searchFromHostel?query=${val}`);
             console.log(res.data);
             console.log(res.data.data);
             setRoomDetails(res.data.data);

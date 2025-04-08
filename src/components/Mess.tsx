@@ -66,7 +66,7 @@ interface data{
 
 function Mess(){
 
-
+    const api = import.meta.env.VITE_API_URL;
     const [roomDetails , setRoomDetails] = useState<data[] | null>(null);
     const timer = useRef(0);
     const searchRef = useRef<HTMLInputElement>(null);
@@ -75,7 +75,7 @@ function Mess(){
     async function mainFun(val: string){
         
         try{
-            const res = await axios.get(`http://localhost:3000/api/v1/room/searchFromMess?query=${val}`);
+            const res = await axios.get(`${api}/api/v1/room/searchFromMess?query=${val}`);
             console.log(res.data);
             console.log(res.data.data);
             setRoomDetails(res.data.data);
@@ -98,7 +98,7 @@ function Mess(){
         setIsLoading(true);
         const val = searchRef.current?.value;
         try{
-            const res = await axios.get(`http://localhost:3000/api/v1/room/searchFromMess?query=${val}`);
+            const res = await axios.get(`${api}/api/v1/room/searchFromMess?query=${val}`);
             console.log(res.data);
             console.log(res.data.data);
             setRoomDetails(res.data.data);

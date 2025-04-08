@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 
 function HostForm(){
     const navigate =  useNavigate();
+    const api = import.meta.env.VITE_API_URL;
 
     const nameRef = useRef<HTMLInputElement>(null);
     const YOERef = useRef<HTMLInputElement>(null);
@@ -56,7 +57,7 @@ function HostForm(){
                 try{
                     let res;
                     try{
-                        res = await axios.post("http://localhost:3000/api/v1/seller/newseller" , {
+                        res = await axios.post(`${api}/api/v1/seller/newseller` , {
                             name,
                             YOE,
                             city, 

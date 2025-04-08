@@ -64,6 +64,8 @@ interface roomcardSection{
 
 function RoomCardsSection({path}: roomcardSection){
 
+    const api = import.meta.env.VITE_API_URL;
+
     const [data, setData] = useState<roomData[]>([]);
     const [isLoading , setIsLoading] = useState(false);
     
@@ -82,7 +84,7 @@ function RoomCardsSection({path}: roomcardSection){
             try{
                 let res;
                 try{
-                    res = await axios.get(`http://localhost:3000/api/v1/room${path}`);
+                    res = await axios.get(`${api}/api/v1/room${path}`);
                     console.log(res);
                 }catch(error){
                     if(axios.isAxiosError(error) && error.response){

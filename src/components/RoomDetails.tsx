@@ -78,12 +78,13 @@ interface review{
 
 function RoomDetails(){
 
+    const api = import.meta.env.VITE_API_URL;
+
     const navigate = useNavigate();
     const {id} = useParams();
     const [isLiked , setIsLiked] = useState(false);
     const [isDisliked , setIsDisliked] = useState(false);
     const [isSaved , setIsSaved] = useState(false);
-    
 
     const [data, setData] = useState<roomData | null>(null);
     const [isLoading , setIsLoading] = useState(true);
@@ -94,7 +95,7 @@ function RoomDetails(){
       setIsLiked(true);
       // backend request to update the data
       try{
-        await axios.put(`http://localhost:3000/api/v1/room/${id}/like` , {},
+        await axios.put(`${api}/api/v1/room/${id}/like` , {},
           {
             headers: {
               token: localStorage.getItem("token")
@@ -120,7 +121,7 @@ function RoomDetails(){
       setIsDisliked(true);
       // backend request to update the data
       try{
-        await axios.put(`http://localhost:3000/api/v1/room/${id}/dislike` , {},
+        await axios.put(`${api}/api/v1/room/${id}/dislike` , {},
           {
             headers: {
               token: localStorage.getItem("token")
@@ -146,7 +147,7 @@ function RoomDetails(){
       setIsDisliked(false);
       // backend request to update the data
       try{
-        await axios.put(`http://localhost:3000/api/v1/room/${id}/undislike` , {},
+        await axios.put(`${api}/api/v1/room/${id}/undislike` , {},
           {
             headers: {
               token: localStorage.getItem("token")
@@ -170,7 +171,7 @@ function RoomDetails(){
       setIsLiked(false);
       // backend request to update the data
       try{
-        await axios.put(`http://localhost:3000/api/v1/room/${id}/unlike` , {},
+        await axios.put(`${api}/api/v1/room/${id}/unlike` , {},
           {
             headers: {
               token: localStorage.getItem("token")
@@ -195,7 +196,7 @@ function RoomDetails(){
       // backend request to update the data
       try{
         
-        await axios.put(`http://localhost:3000/api/v1/room/${id}/save` , 
+        await axios.put(`${api}/api/v1/room/${id}/save` , 
           {},
           {
             headers: {
@@ -220,7 +221,7 @@ function RoomDetails(){
       setIsSaved(false);
       // backend request to update the data
       try{
-        await axios.put(`http://localhost:3000/api/v1/room/${id}/unsave` , {},
+        await axios.put(`${api}/api/v1/room/${id}/unsave` , {},
           {
             headers: {
               token: localStorage.getItem("token")
@@ -269,7 +270,7 @@ function RoomDetails(){
           let res;
           let isSaved , isLiked , isDisliked;
           try{
-              res = await axios.get(`http://localhost:3000/api/v1/room/roomdetails/${id}`,
+              res = await axios.get(`${api}/api/v1/room/roomdetails/${id}`,
                 {
                   headers: {
                     token: localStorage.getItem("token")

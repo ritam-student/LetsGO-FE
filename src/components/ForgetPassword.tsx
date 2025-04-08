@@ -8,6 +8,8 @@ import Swal from "sweetalert2";
 
 function ForgetPassword(){
 
+    const api = import.meta.env.VITE_API_URL;
+
     const [isLoading , setIsLoading] = useState(false);
     const [notPasswordMatch , setNotPasswordMatch] = useState(false);
     const navigate = useNavigate();
@@ -35,7 +37,7 @@ function ForgetPassword(){
                 setIsLoading(s => !s);
                 let res;
                 try {
-                    res = await axios.put("http://localhost:3000/api/v1/user/forgetPassword", {
+                    res = await axios.put(`${api}/api/v1/user/forgetPassword`, {
                         newPass,
                         email
                     });

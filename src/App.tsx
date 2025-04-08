@@ -2,6 +2,8 @@ import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom"
 import { lazy, Suspense, useState } from "react"
 import 'swiper/swiper-bundle.css';
 import '../node_modules/swiper/modules/pagination-element.min.css';
+import '../node_modules/swiper/modules/zoom.css';
+import '../node_modules/swiper/modules/navigation.css';
 
 
 
@@ -21,7 +23,6 @@ const HostForm = lazy(() => import("./components/HostForm"));
 const CreateNewRoom = lazy(() => import("./components/CreateNewRoom"));
 const NewReview = lazy(() => import("./components/NewReview"));
 const NotFound = lazy (() => import("./components/NotFound"));
-const WishList = lazy(() => import("./components/wishList"));
 
 
 import Loader from "./components/Loader"
@@ -149,7 +150,6 @@ function App() {
           <Route path="/createnewroom" element={<CreateNewRoom/>}></Route>
           <Route path="/newreview/:id" element={<NewReview/>}></Route>
           <Route path="*" element={<NotFound/>}></Route>
-          <Route path="/wishlist" element={<WishList/>}></Route>
         </Routes>
         </Suspense>
       </BrowserRouter>

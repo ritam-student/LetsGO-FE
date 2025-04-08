@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 
 
 function NewReview(){
+    const api = import.meta.env.VITE_API_URL;
 
     const {id} = useParams();
 
@@ -49,7 +50,7 @@ function NewReview(){
             const review = reviewRef.current.value;
 
             try{
-                const res = await axios.post(`http://localhost:3000/api/v1/review/newreview/${id}`, {
+                const res = await axios.post(`${api}/api/v1/review/newreview/${id}`, {
                     name,
                     ratings,
                     review

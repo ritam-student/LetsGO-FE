@@ -9,6 +9,11 @@ function Signup(){
 
     const navigate = useNavigate();
 
+    const cloudName = import.meta.env.VITE_CLOUD_NAME;
+    const uploadPreset = import.meta.env.VITE_UPLOAD_PRESET;
+    const cloudUrl = import.meta.env.VITE_CLOUD_URL;
+    const api = import.meta.env.VITE_API_URL;
+
     const userNameRef = useRef<HTMLInputElement>(null);
     const emailRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
@@ -63,15 +68,13 @@ function Signup(){
             const formData = new FormData();
 
             formData.append("file" , image);
-            formData.append("upload_preset" , "LetsGO");
-            formData.append("cloud_name" , "ritam-backend");
+            formData.append("upload_preset" , `${uploadPreset}`);
+            formData.append("cloud_name" , `${cloudName}`);
              
             setIsLoading(s => !s);
             let imageUrl:string;
             try{
-                const resp = await axios.post("https://api.cloudinary.com/v1_1/ritam-backend/image/upload", formData);
-                console.log(resp);
-                console.log(resp.data.secure_url);
+                const resp = await axios.post(`${cloudUrl}`, formData);
                 imageUrl = resp.data.secure_url;
             }catch(error){
                 setIsLoading(s => !s);
@@ -90,7 +93,7 @@ function Signup(){
                 
                 let res;
                 try {
-                    res = await axios.post("http://localhost:3000/api/v1/user/signup", {
+                    res = await axios.post(`${api}/api/v1/user/signup`, {
                         userName,
                         email,
                         password,

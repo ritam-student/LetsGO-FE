@@ -63,11 +63,12 @@ function Home(){
     const searchRef = useRef<HTMLInputElement>(null);
     const [isLoading , setIsLoading] = useState(false);
     const [isError , setIsError] = useState(false);
+    const api = import.meta.env.VITE_API_URL;
 
     async function mainFun(val: string){
         
         try{
-            const res = await axios.get(`http://localhost:3000/api/v1/room/searchFromAll?query=${val}`);
+            const res = await axios.get(`${api}/api/v1/room/searchFromAll?query=${val}`);
             console.log(res.data);
             console.log(res.data.data);
             setRoomDetails(res.data.data);
@@ -106,7 +107,7 @@ function Home(){
             setIsLoading(true);
             const val = searchRef.current?.value;
             try{
-                const res = await axios.get(`http://localhost:3000/api/v1/room/searchFromApartment?query=${val}`);
+                const res = await axios.get(`${api}/api/v1/room/searchFromApartment?query=${val}`);
                 console.log(res.data);
                 console.log(res.data.data);
                 setRoomDetails(res.data.data);

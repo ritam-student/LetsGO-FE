@@ -8,6 +8,11 @@ import Swal from "sweetalert2";
 
 function CreateNewRoom(){
 
+    const cloudName = import.meta.env.VITE_CLOUD_NAME;
+    const uploadPreset = import.meta.env.VITE_UPLOAD_PRESET;
+    const cloudUrl = import.meta.env.VITE_CLOUD_URL;
+    const api = import.meta.env.VITE_API_URL;
+
     const [isKitchen , setIsKitchen] = useState(false);
     const [isAc , setIsAc] = useState(false);
     const [isWifi , setIsWifi] = useState(false);
@@ -79,8 +84,8 @@ function CreateNewRoom(){
         const formDataArray = images.map((image) => {
             const formData = new FormData();
             formData.append("file", image);
-            formData.append("upload_preset", "LetsGO");
-            formData.append("cloud_name", "ritam-backend");
+            formData.append("upload_preset", `${uploadPreset}`);
+            formData.append("cloud_name", `${cloudName}`);
             return formData;
         });
     
@@ -90,7 +95,7 @@ function CreateNewRoom(){
         try {
             // Upload all images sequentially (or use Promise.all for parallel uploads)
             for (const formData of formDataArray) {
-                const resp = await axios.post("https://api.cloudinary.com/v1_1/ritam-backend/image/upload", formData);
+                const resp = await axios.post(`${cloudUrl}`, formData);
                 console.log("Response:", resp);
                 console.log("Uploaded Image URL:", resp.data.secure_url);
                 imageUrls.push(resp.data.secure_url);
@@ -167,7 +172,7 @@ function CreateNewRoom(){
             try{
                 let res;
                 try {
-                    res = await axios.post("http://localhost:3000/api/v1/room/newroom", {
+                    res = await axios.post(`${api}/api/v1/room/newroom`, {
                         email,
                         houseName,
                         description,
