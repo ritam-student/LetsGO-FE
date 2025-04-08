@@ -1,0 +1,1 @@
+import{j as e}from"./index-CvtE0vql.js";import"./react-DJG_os-6.js";import"./swiper-B7pBPPGb.js";function s(){return e.jsx(e.Fragment,{children:e.jsx("div",{className:"flex items-center justify-center text-black h-screen w-full bg-[#fab1a0] animate-pulse",children:e.jsx("h3",{className:"text-4xl font-bold  ",children:"404 Page Not Found !"})})})}export{s as default};
