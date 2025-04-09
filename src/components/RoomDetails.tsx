@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { AirVent, Bed, CookingPot, IndianRupee, Wifi, X } from "lucide-react";
 
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -112,7 +113,7 @@ function RoomDetails(){
           text: 'Sorry , unable to update the room',
           confirmButtonText: 'OK'
         });
-        console.log(error);
+        
       }
 
     }
@@ -138,7 +139,7 @@ function RoomDetails(){
           text: 'Sorry , unable to update the room',
           confirmButtonText: 'OK'
         });
-        console.log(error);
+        
       }
 
     }
@@ -163,7 +164,7 @@ function RoomDetails(){
           text: 'Sorry , unable to update the room',
           confirmButtonText: 'OK'
         });
-        console.log(error);
+        
       }
     }
 
@@ -187,7 +188,7 @@ function RoomDetails(){
           text: 'Sorry , unable to update the room',
           confirmButtonText: 'OK'
         });
-        console.log(error);
+        
       }
     }
 
@@ -213,7 +214,7 @@ function RoomDetails(){
           text: 'Sorry , unable to update the room',
           confirmButtonText: 'OK'
         });
-        console.log(error);
+        
       }
     }
 
@@ -237,7 +238,7 @@ function RoomDetails(){
           text: 'Sorry , unable to update the room',
           confirmButtonText: 'OK'
         });
-        console.log(error);
+        
       }
     }
 
@@ -277,7 +278,7 @@ function RoomDetails(){
                   }
                 }
               );
-              console.log(res);
+              
               if (res.data.data.user.likes.length === 0){
                 isLiked = false;
               } else {
@@ -323,7 +324,7 @@ function RoomDetails(){
                       });
                       
                   }else if(status === 401){
-                    console.log("Unauthorized access...");
+                    
                       Swal.fire({
                         icon: "error",
                         title: 'Oops !',
@@ -331,7 +332,7 @@ function RoomDetails(){
                         confirmButtonText: 'OK'
                       });
                   }else{
-                    console.log("Error while getting room details...");
+                    
                     Swal.fire({
                       icon: 'error',
                       title: 'Oops !',
@@ -340,7 +341,7 @@ function RoomDetails(){
                     })
                   }
               }else{
-                  console.log("internal error");
+                  
                   Swal.fire({
                     icon: 'error',
                     title: 'Oops !',
@@ -354,14 +355,14 @@ function RoomDetails(){
           setIsError(false);
           const newData = res?.data.data.roomDetails;
           setData(newData);
-          console.log(newData);
+          
           setIsLoading(false);
           setIsLiked(isLiked);
           setIsDisliked(isDisliked);
           setIsSaved(isSaved);
         }catch(error){
           setIsError(true);
-            console.error(error);
+            
             setIsLoading(false);
         }
     }

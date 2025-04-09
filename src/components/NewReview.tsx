@@ -50,7 +50,7 @@ function NewReview(){
             const review = reviewRef.current.value;
 
             try{
-                const res = await axios.post(`${api}/api/v1/review/newreview/${id}`, {
+                await axios.post(`${api}/api/v1/review/newreview/${id}`, {
                     name,
                     ratings,
                     review
@@ -69,13 +69,19 @@ function NewReview(){
                 });
                 redirect();
 
-                console.log(res.data.data);
+                
             }catch(error){
                 setIsLoading(false);
                 if (axios.isAxiosError(error) && error.response) {
                     const statusCode = error.response.status;
                     if (statusCode === 400) {
-                        console.log("error is : " , error);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops',
+                            text: 'Something went wrong...',
+                            confirmButtonText: 'OK',
+                            timer: 3000
+                        })
                     }
                 }
             }

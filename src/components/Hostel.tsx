@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import RoomCardsSection from "./RoomCardsSection";
 import axios from "axios";
 import Roomcard from "./Roomcard";
+import Swal from "sweetalert2";
 
 
 
@@ -74,8 +75,7 @@ function Hostel(){
         
         try{
             const res = await axios.get(`${api}/api/v1/room/searchFromHostel?query=${val}`);
-            console.log(res.data);
-            console.log(res.data.data);
+            
             setRoomDetails(res.data.data);
             setIsLoading(false);
             
@@ -84,7 +84,13 @@ function Hostel(){
             if (axios.isAxiosError(error) && error.response){
                 const status = error.response.status;
                 if(status === 404){
-                    console.log('error');
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops',
+                        text: 'Something went wrong...',
+                        confirmButtonText: 'OK',
+                        timer: 3000
+                    })
                 }
             }
             
@@ -96,8 +102,7 @@ function Hostel(){
         const val = searchRef.current?.value;
         try{
             const res = await axios.get(`${api}/api/v1/room/searchFromHostel?query=${val}`);
-            console.log(res.data);
-            console.log(res.data.data);
+            
             setRoomDetails(res.data.data);
             setIsLoading(false);
             
@@ -106,7 +111,13 @@ function Hostel(){
             if (axios.isAxiosError(error) && error.response){
                 const status = error.response.status;
                 if(status === 404){
-                    console.log('error');
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops',
+                        text: 'Something went wrong...',
+                        confirmButtonText: 'OK',
+                        timer: 3000
+                    })
                 }
             }
             
@@ -116,7 +127,7 @@ function Hostel(){
     function onChangeInput(e: React.ChangeEvent<HTMLInputElement>): void {
         clearTimeout(timer.current);
         timer.current = setTimeout(() => {
-            console.log(e.target.value);
+            
             const val = e.target.value;
             if (val === ""){
                 setRoomDetails(null);

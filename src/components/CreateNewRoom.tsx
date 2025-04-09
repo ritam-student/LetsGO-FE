@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import axios from "axios";
 import { IndianRupee, X } from "lucide-react";
 import { useRef, useState } from "react";
@@ -96,16 +97,14 @@ function CreateNewRoom(){
             // Upload all images sequentially (or use Promise.all for parallel uploads)
             for (const formData of formDataArray) {
                 const resp = await axios.post(`${cloudUrl}`, formData);
-                console.log("Response:", resp);
-                console.log("Uploaded Image URL:", resp.data.secure_url);
+                
                 imageUrls.push(resp.data.secure_url);
             }
     
-            console.log("All Uploaded Image URLs:", imageUrls);
-            console.log("is ac : " , isAc);
+            
         } catch (error) {
             setIsLoading(false);
-            console.log("Error:", error);
+            
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
@@ -207,7 +206,7 @@ function CreateNewRoom(){
                                 text: "Become a seller to add rooms....",
                                 confirmButtonText: "Ok"
                             });
-                            console.log("Become a seller to add rooms.");
+                            
                         }else if (statusCode === 404) {
                             Swal.fire({
                                 icon: 'error',
@@ -215,7 +214,7 @@ function CreateNewRoom(){
                                 text: "Seller not found....",
                                 confirmButtonText: "Ok"
                             });
-                            console.log("Become a seller to add rooms.");
+                            
                         } else {
                             Swal.fire({
                                 icon: 'error',
@@ -223,9 +222,9 @@ function CreateNewRoom(){
                                 text: "Failed to create room. Please try again later.....",
                                 confirmButtonText: "Ok"
                             });
-                            console.log("Failed to create room. Please try again later.");
+                            
                         }
-                        console.error("Error response: ", error.response.data);
+                        
                     } else {
                         Swal.fire({
                             icon: 'error',
@@ -233,11 +232,11 @@ function CreateNewRoom(){
                             text: "Something went wrong. Please try again later.....",
                             confirmButtonText: "Ok"
                         });
-                        console.error("Unexpected error: ", error);
+                        
                     }
                     return; // Exit the function if an error occurs
                 }
-                console.log(res.data);
+                
                 setIsLoading(s => !s);
                 Swal.fire({
                     title: "sucess",
@@ -255,7 +254,7 @@ function CreateNewRoom(){
                     confirmButtonText: "Ok"
                 });
                 setIsLoading(s => !s);
-                console.log("error is : " + e);
+                
             }
         }
 

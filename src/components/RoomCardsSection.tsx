@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
 import { useEffect, useState } from "react";
 import Roomcard from "./Roomcard";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 
 
@@ -74,8 +76,7 @@ function RoomCardsSection({path}: roomcardSection){
             
             fetchData();
             
-            console.log("data is : " , data);
-            console.log("type of data is : " , typeof(data));
+            
         // eslint-disable-next-line react-hooks/exhaustive-deps
         } , []);
     
@@ -90,18 +91,36 @@ function RoomCardsSection({path}: roomcardSection){
                     if(axios.isAxiosError(error) && error.response){
                         const status = error.response.status;
                         if(status === 400){
-                            console.log("bad request...");
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops',
+                                text: 'bad request...',
+                                confirmButtonText: 'OK',
+                                timer: 3000
+                            })
                         }
                     }else{
-                        console.log("internal error");
+                        Swal.fire({
+                                icon: 'error',
+                                title: 'Oops',
+                                text: 'Internal error...',
+                                confirmButtonText: 'OK',
+                                timer: 3000
+                            })
                     }
                 }
                 const newData = res?.data.data;
                 setData(newData || []);
-                console.log(data);
+                
                 setIsLoading(false);
             }catch(error){
-                console.error(error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops',
+                    text: 'Somthing went wrong...',
+                    confirmButtonText: 'OK',
+                    timer: 3000
+                })
             }
         }
 

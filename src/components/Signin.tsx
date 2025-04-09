@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import axios from "axios";
 import { X } from "lucide-react";
 import { useRef, useState } from "react";
@@ -64,10 +65,10 @@ function Signin({setUser , setIsLoggedIn} : signin){
     async function submitSigninForm(){
         if(emailRef.current?.value === undefined || emailRef.current.value === ""){
             emailRef.current?.focus();
-            console.log("emailRef");
+            
         }else if (passwordRef.current?.value === undefined || passwordRef.current.value === ""){
             passwordRef.current?.focus();
-            console.log("passwordRef");
+            
         }else {
             
             const email = emailRef.current.value;
@@ -92,7 +93,7 @@ function Signin({setUser , setIsLoggedIn} : signin){
                                 text: "Invalid input. Please check your details.....",
                                 confirmButtonText: "Ok"
                             });
-                            console.log("Invalid input. Please check your details.");
+                            
                             emailRef.current.focus();
                             setIsEmailDoesnotExist(true);
                         } else if (statusCode === 403) {
@@ -102,7 +103,7 @@ function Signin({setUser , setIsLoggedIn} : signin){
                                 text: "User does not exist. Please signup....",
                                 confirmButtonText: "Ok"
                             });
-                            console.log("User does not exist. Please signup...");
+                            
                             emailRef.current.focus();
                             setIsEmailDoesnotExist(s => !s);
                         }else if (statusCode === 402) {
@@ -112,7 +113,7 @@ function Signin({setUser , setIsLoggedIn} : signin){
                                 text: "Invalid credentials. Please check....",
                                 confirmButtonText: "Ok"
                             });
-                            console.log("Invalid credentials. Please check...");
+                            
                         } else {
                             Swal.fire({
                                 icon: 'error',
@@ -122,7 +123,7 @@ function Signin({setUser , setIsLoggedIn} : signin){
                             });
                             console.log("Failed to sign in. Please try again later.");
                         }
-                        console.error("Error response: ", error.response.data);
+                        
                     } else {
                         Swal.fire({
                             icon: 'error',
@@ -130,17 +131,16 @@ function Signin({setUser , setIsLoggedIn} : signin){
                             text: "Something went wrong. Please try again later....",
                             confirmButtonText: "Ok"
                         });
-                        console.error("Unexpected error: ", error);
+                        
                     }
                     return; // Exit the function if an error occurs
                 }
-                console.log(res);
+                
                 localStorage.setItem('token' , res.data.data.token);
                 localStorage.setItem('userImgUrl' , res.data.data.userData.imageUrl);
                 localStorage.setItem('sellerToken' , res.data.data.sellerToken);
                 setUser(res.data.data.userData);
-                console.log("token : ", res.data.data.token);
-                console.log("user details : " , res.data.data.userData);
+                
                 setIsEmailDoesnotExist(s => !s);
                 setIsLoading(s => !s);
                 setIsLoggedIn(true);
@@ -160,7 +160,7 @@ function Signin({setUser , setIsLoggedIn} : signin){
                     confirmButtonText: "Ok"
                 });
                 setIsLoading(s => !s);
-                console.log("error is : " + e);
+                
             }
 
         }

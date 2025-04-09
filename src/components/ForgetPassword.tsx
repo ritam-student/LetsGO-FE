@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import axios from "axios";
 import { X } from "lucide-react";
 import { useRef, useState } from "react";
@@ -30,9 +31,7 @@ function ForgetPassword(){
         } else{
             const newPass = newPasswordRef.current.value;
             const email = emailRef.current.value;
-            console.log(newPass);
-            console.log(email);
-
+            
             try{
                 setIsLoading(s => !s);
                 let res;
@@ -46,19 +45,47 @@ function ForgetPassword(){
                     if (axios.isAxiosError(error) && error.response) {
                         const statusCode = error.response.status;
                         if (statusCode === 404) {
-                            console.log("Can't find your details. Please try after sometime.");
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops',
+                                text: "Can't find your details. Please try after sometime....",
+                                confirmButtonText: 'OK',
+                                timer: 3000
+                            })
+                            
                         }else if (statusCode === 500){
-                            console.log("Internal error. Please try after sometime.");
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops',
+                                text: "Internal error. Please try after sometime....",
+                                confirmButtonText: 'OK',
+                                timer: 3000
+                            })
+                            
                         } else {
-                            console.log("Failed to change your password. Please try again later.");
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops',
+                                text: "Failed to change your password. Please try again later.....",
+                                confirmButtonText: 'OK',
+                                timer: 3000
+                            })
+                            
                         }
-                        console.error("Error response: ", error.response.data);
+                        
                     } else {
-                        console.error("Unexpected error: ", error);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops',
+                            text: "Something went wrong ....",
+                            confirmButtonText: 'OK',
+                            timer: 3000
+                        })
+                        
                     }
                     return; // Exit the function if an error occurs
                 }
-                console.log(res);
+                
                 setNotPasswordMatch(false);
                 setIsLoading(s => !s);
                 Swal.fire({
@@ -69,7 +96,7 @@ function ForgetPassword(){
                 });
             }catch(e){
                 setIsLoading(s => !s);
-                console.log("error is : " + e);
+                
             }
         }
     }

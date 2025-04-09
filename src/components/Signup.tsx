@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import axios from "axios";
 import { X } from "lucide-react";
 import { useRef, useState } from "react";
@@ -41,16 +42,16 @@ function Signup(){
     async function submitSignupForm(){
         if(userNameRef.current?.value === undefined || userNameRef.current.value === ""){
             userNameRef.current?.focus();
-            console.log('userNameRef');
+            
         }else if(emailRef.current?.value === undefined || emailRef.current.value === ""){
             emailRef.current?.focus();
-            console.log("emailRef");
+            
         }else if (passwordRef.current?.value === undefined || passwordRef.current.value === ""){
             passwordRef.current?.focus();
-            console.log("passwordRef");
+            
         }else if (countryRef.current?.value === undefined || countryRef.current.value === ""){
             countryRef.current?.focus();
-            console.log("countryRef");
+            
         }else if (!image){
             Swal.fire({
                 icon: 'error',
@@ -78,7 +79,7 @@ function Signup(){
                 imageUrl = resp.data.secure_url;
             }catch(error){
                 setIsLoading(s => !s);
-                console.log("error is " , error);
+                
                 Swal.fire({
                     icon: 'error',
                     title: "Oops...",
@@ -88,7 +89,7 @@ function Signup(){
                 return;
             }
 
-            console.log(imageUrl);
+            
             try{
                 
                 let res;
@@ -111,7 +112,7 @@ function Signup(){
                                 text: "Invalid input. Please check your details....",
                                 confirmButtonText: "Ok"
                             });
-                            console.log("Invalid input. Please check your details.");
+                            
                         } else if (statusCode === 409) {
                             Swal.fire({
                                 icon: 'error',
@@ -119,7 +120,7 @@ function Signup(){
                                 text: "email already exists. Try logging in.....",
                                 confirmButtonText: "Ok"
                             });
-                            console.log("email already exists. Try logging in.");
+                            
                             emailRef.current.focus();
                             setIsEmailExist(s => !s);
                         }else if (statusCode === 410) {
@@ -129,7 +130,7 @@ function Signup(){
                                 text: "eusername already exists. Try logging in.....",
                                 confirmButtonText: "Ok"
                             });
-                            console.log("username already exists. Try logging in.");
+                            
                             userNameRef.current.focus();
                             setIsUserNameExist(s => !s);
                         } else {
@@ -139,9 +140,9 @@ function Signup(){
                                 text: "Failed to create an account. Please try again later.....",
                                 confirmButtonText: "Ok"
                             });
-                            console.log("Failed to create an account. Please try again later.");
+                            
                         }
-                        console.error("Error response: ", error.response.data);
+                        
                     } else {
                         Swal.fire({
                             icon: 'error',
@@ -149,11 +150,11 @@ function Signup(){
                             text: "Something went wrong. Please try again later.....",
                             confirmButtonText: "Ok"
                         });
-                        console.error("Unexpected error: ", error);
+                        
                     }
                     return; // Exit the function if an error occurs
                 }
-                console.log(res.data);
+                
                 setIsEmailExist(s => !s);
                 setIsUserNameExist(s => !s);
                 setIsLoading(s => !s);
@@ -173,7 +174,7 @@ function Signup(){
                     confirmButtonText: "Ok"
                 });
                 setIsLoading(s => !s);
-                console.log("error is : " + e);
+                
             }
 
         }

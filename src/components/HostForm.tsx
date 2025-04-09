@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // import { X } from "lucide-react";
 
 import axios from "axios";
@@ -31,26 +32,26 @@ function HostForm(){
     async function submitForm(){
         if(nameRef.current?.value === undefined || nameRef.current.value === ""){
             nameRef.current?.focus();
-            console.log("emailRef is Required...");
+            
         }else if (YOERef.current?.value === undefined || YOERef.current.value === ""){
             YOERef.current?.focus();
-            console.log("passwordRef is Required....");
+            
         }else if (stateRef.current?.value === undefined || stateRef.current.value === ""){
             stateRef.current?.focus();
-            console.log("stateRef is Required....");
+            
         }else if (cityRef.current?.value === undefined || cityRef.current.value === ""){
             cityRef.current?.focus();
-            console.log("cityRef is Required....");
+            
         }else if (pincodeRef.current?.value === undefined || pincodeRef.current.value === ""){
             pincodeRef.current?.focus();
-            console.log("pincodeRef is Required....");
+            
         }else{
             const name = nameRef.current.value;
             const YOE = YOERef.current.value;
             const city = cityRef.current.value;
             const state = stateRef.current.value;
             const pincode = pincodeRef.current.value;
-            console.log(name);
+            
             setIsLoading(true);
             const token = localStorage.getItem('token');
             if (token){
@@ -71,7 +72,7 @@ function HostForm(){
                         }
                     );
     
-                    console.log(res);
+                    
                     }catch(error){
                         setIsLoading(s => !s);
                         if (axios.isAxiosError(error) && error.response) {
@@ -119,11 +120,11 @@ function HostForm(){
                                 text: "Internal error. Please try again later....",
                                 confirmButtonText: "Ok"
                             });
-                            console.error("Unexpected error: ", error);
+                            
                         }
                         return; // Exit the function if an error occurs
                     }
-                    console.log(res.data.data);
+                    
                     localStorage.setItem('sellerToken' , res.data.data);
                     setIsLoading(false);
                     Swal.fire({
@@ -135,7 +136,7 @@ function HostForm(){
                     });
                     redirect();
                 }catch(error){
-                    console.log("error is :" , error);
+                    
                     Swal.fire({
                         icon: "error",
                         title: "Oops",
