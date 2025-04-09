@@ -189,7 +189,7 @@ function Signup(){
         }
     }
 
-    return <div className="h-auto w-full bg-[#fab1a0]  text-black font-semibold text-xl flex items-center justify-center py-15">
+    return <div className="h-auto min-h-screen w-full bg-[#fab1a0]  text-black font-semibold text-xl flex items-center justify-center py-15">
     <div className={`relative  bg-[#FEA47F] shadow-lg shadow-gray-400    w-[300px] md:w-[400px] lg:w-[600px] flex px-6 py-4 md:py-6 lg:py-8 rounded-xl  flex-col `}>
         
         <X  onClick={redirect}  className=" cursor-pointer absolute right-5 hover:border-2 hover:border-black rounded-md text-black"/> 

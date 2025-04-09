@@ -168,7 +168,7 @@ function Signin({setUser , setIsLoggedIn} : signin){
 
 
 
-    return <div className="h-auto w-full text-black font-semibold text-xl flex items-center justify-center bg-[#fab1a0] py-16 ">
+    return <div className="h-auto min-h-screen w-full text-black font-semibold text-xl flex items-center justify-center bg-[#fab1a0] py-16 ">
     <div className="relative bg-[#FEA47F] shadow-lg shadow-gray-400  w-[300px] md:w-[400px] lg:w-[600px] flex px-9 py-4 md:py-6 lg:py-8 rounded-xl  flex-col">
         
         <X  onClick={redirect}  className=" cursor-pointer absolute right-5 hover:border-2 hover:border-black rounded-md text-black "/> 
