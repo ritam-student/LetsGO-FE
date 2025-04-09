@@ -34,9 +34,9 @@ function ForgetPassword(){
             
             try{
                 setIsLoading(s => !s);
-                let res;
+                
                 try {
-                    res = await axios.put(`${api}/api/v1/user/forgetPassword`, {
+                    await axios.put(`${api}/api/v1/user/forgetPassword`, {
                         newPass,
                         email
                     });

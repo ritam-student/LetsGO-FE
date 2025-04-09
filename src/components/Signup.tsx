@@ -92,9 +92,9 @@ function Signup(){
             
             try{
                 
-                let res;
+                
                 try {
-                    res = await axios.post(`${api}/api/v1/user/signup`, {
+                    await axios.post(`${api}/api/v1/user/signup`, {
                         userName,
                         email,
                         password,
