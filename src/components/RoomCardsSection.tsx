@@ -86,7 +86,7 @@ function RoomCardsSection({path}: roomcardSection){
                 let res;
                 try{
                     res = await axios.get(`${api}/api/v1/room${path}`);
-                    console.log(res);
+                    
                 }catch(error){
                     if(axios.isAxiosError(error) && error.response){
                         const status = error.response.status;
