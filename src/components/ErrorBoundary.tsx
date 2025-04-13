@@ -33,7 +33,7 @@ class ErrorBoundary extends Component<Props , State>{
     render() {
         if(this.state.hasError){
             return (
-                <div className='h-full w-full flex items-center justify-center '>
+                <div className='min-h-screen h-full w-full flex items-center justify-center '>
                     <h3 className='text-3xl font-semibold text-black'>Something went wrong.....</h3>
                 </div>
             )

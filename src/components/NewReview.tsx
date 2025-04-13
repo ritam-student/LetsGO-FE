@@ -89,23 +89,23 @@ function NewReview(){
     }
 
     return <>
-    <div className="bg-[#fab1a0] h-auto w-full flex items-center justify-center text-black py-20">
-        <div className="bg-[#FEA47F] rounded-xl h-auto w-auto px-4 md:px-6 lg:px-8 py-8 flex items-center justify-center flex-col relative ">
-            <X size={"30px"} onClick={redirect} className="absolute cursor-pointer right-3 top-2 hover:border-2 hover:border-black text-black rounded-md"/>
-            <h2 className="text-black text-xl md:text-2xl lg:text-3xl font-bold ">Add Review</h2>
+    <div className="h-auto min-h-screen w-full text-black font-semibold text-lg flex items-center justify-center bg-[#F9FAFB] py-15 ">
+        <div className="relative bg-white shadow-lg shadow-gray-300  w-[310px] sm:w-[360px] md:w-[400px] lg:w-[600px] flex px-6 py-4 md:py-6 lg:py-8 rounded-xl  flex-col">
+            <X size={"20px"} onClick={redirect} className="absolute cursor-pointer right-3 top-2 hover:border-2 hover:border-black text-black rounded-md"/>
+            <h2 className="text-[#0EA5E9] text-center text-xl md:text-2xl lg:text-3xl font-bold ">Add Review</h2>
             <div>
                 <div className="mt-[12vh] ">
                     <div className="relative">
-                        <p className="text-lg font-semibold text-black">Your Name : <span className="text-red-500 ml-1">*</span></p>
-                        <input type="text" ref={nameRef}  placeholder="Enter your name" className={`rounded-xl shadow-sm shadow-gray-500 text-white border-none bg-slate-900 focus:outline-blue-500 w-[70vw] md:w-[50vw] lg:w-[40vw] my-5 h-[40px] px-4`} />
+                        <p className="text-sm md:text-lg my-2 font-semibold text-black">Your Name : <span className="text-red-500 ml-1">*</span></p>
+                        <input type="text" ref={nameRef}  placeholder="Enter your name" className={`rounded-xl border-2 border-gray-300 text-black  focus:outline-[#0EA5E9] w-full  h-[40px] px-4`} />
                     </div>
-                    <p className="text-lg font-semibold text-black">Enter your ratings : <span className="text-red-500 ml-1">*</span></p>
-                    <input type="text" ref={ratingRef}  placeholder="Enter your ratings (0 to 5)" className={`rounded-xl shadow-sm shadow-gray-500 text-white border-none bg-slate-900 focus:outline-blue-500 w-full my-5 h-[40px] px-4`} />
-                    <p className="text-lg font-semibold text-black">Review : <span className="text-red-500 ml-1">*</span></p>
-                    <textarea name="Rveview" ref={reviewRef} placeholder="Enter your review here..." className={`rounded-xl shadow-sm shadow-gray-500 text-white border-none bg-slate-900 focus:outline-blue-500 w-full my-5 px-4 pt-1.5`}></textarea>
+                    <p className="text-sm md:text-lg my-2 font-semibold text-black">Enter your ratings : <span className="text-red-500 ml-1">*</span></p>
+                    <input type="text" ref={ratingRef}  placeholder="Enter your ratings (0 to 5)" className={`rounded-xl border-2 border-gray-300 text-black  focus:outline-[#0EA5E9] w-full  h-[40px] px-4`} />
+                    <p className="text-sm md:text-lg my-2 font-semibold text-black">Review : <span className="text-red-500 ml-1">*</span></p>
+                    <textarea name="Rveview" ref={reviewRef} placeholder="Enter your review here..." className={`rounded-xl border-2 border-gray-300 text-black focus:outline-[#0EA5E9]  bg-white w-full  px-4 pt-1.5`}></textarea>
                 </div>
             </div>
-            <button onClick={submitForm} className="text-xl font-semibold text-white bg-black hover:bg-slate-900 cursor-pointer px-8 md:px-12 lg:px-20 py-1 rounded-xl mt-8">
+            <button onClick={submitForm} className="bg-[#0EA5E9] mx-4 text-sm md:text-lg text-white rounded-2xl font-bold  px-8 py-1 mt-[6vh] cursor-pointer hover:bg-[#0C4A6E] ">
                 {
                     isLoading ?
                     "submitting...."

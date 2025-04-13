@@ -9,7 +9,6 @@ import '../node_modules/swiper/modules/navigation.css';
 
 
 import Navbar from "./components/Nav";
-import Hero from "./components/Hero";
 const Hostel = lazy(() => import("./components/Hostel"));
 const Mess = lazy(() => import("./components/Mess"));
 const PG = lazy(() => import("./components/Pg"));
@@ -28,6 +27,7 @@ const NotFound = lazy (() => import("./components/NotFound"));
 import Loader from "./components/Loader"
 import ErrorBoundary from "./components/ErrorBoundary";
 import Footer from "./components/Footer";
+import AddProperty from "./components/AddProperty";
 
 
 
@@ -74,15 +74,20 @@ function App() {
             <Route path="/hostel" element={<Hostel/>}></Route>
             <Route path="/mess" element={<Mess/>}></Route>
             <Route path="/apartment" element={<Apartment/>}></Route>
+            
+            
           </Route>
+          <Route path="/" element={<Layout1  isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} user={user} setUser={setUser} />} >
           <Route path="/signup" element={<Signup/>}></Route>
-          <Route path="/signin" element={<Signin  setIsLoggedIn={setIsLoggedIn}  setUser={setUser}/>}></Route>
-          <Route path="/roomdetails/:id" element={<RoomDetails/>}></Route>
-          <Route path="/newhost" element={<HostForm/>}></Route>
-          <Route path="/newroom" element={<CreateNewRoom/>}></Route>
-          <Route path="/forgetPassword" element={<ForgetPassword/>}></Route>
-          <Route path="/createnewroom" element={<CreateNewRoom/>}></Route>
-          <Route path="/newreview/:id" element={<NewReview/>}></Route>
+            <Route path="/signin" element={<Signin  setIsLoggedIn={setIsLoggedIn}  setUser={setUser}/>}></Route>
+            <Route path="/roomdetails/:id" element={<RoomDetails/>}></Route>
+            <Route path="/newhost" element={<HostForm/>}></Route>
+            <Route path="/newroom" element={<CreateNewRoom/>}></Route>
+            <Route path="/forgetPassword" element={<ForgetPassword/>}></Route>
+            <Route path="/createnewroom" element={<CreateNewRoom/>}></Route>
+            <Route path="/newreview/:id" element={<NewReview/>}></Route>
+          </Route>
+          
           <Route path="*" element={<NotFound/>}></Route>
         </Routes>
         </Suspense>
@@ -104,7 +109,21 @@ function Layout({isLoggedIn , setIsLoggedIn , user , setUser}: Layout){
 
   return <>
     <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} user={user} setUser={setUser} />
-    <Hero/>
+    
+    <ErrorBoundary>
+      <Outlet/>
+    </ErrorBoundary>
+    <AddProperty />
+    <Footer />
+  </>
+}
+
+
+
+function Layout1({isLoggedIn , setIsLoggedIn , user , setUser}: Layout){
+  return <>
+    <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} user={user} setUser={setUser} />
+    
     <ErrorBoundary>
       <Outlet/>
     </ErrorBoundary>

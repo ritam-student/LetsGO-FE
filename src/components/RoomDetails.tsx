@@ -1,20 +1,18 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { AirVent, Bed, CookingPot, IndianRupee, Wifi, X } from "lucide-react";
+import {  ArrowLeftIcon,  Bath, BedDouble, CheckCircle2,  Heart, Home, Mail, MapPin, ThumbsDown, ThumbsUp } from "lucide-react";
 
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination } from 'swiper/modules';
+import { Navigation, Pagination } from 'swiper/modules';
 import Review from "./Review";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-import { AiOutlineLike } from "react-icons/ai";
-import { AiOutlineDislike } from "react-icons/ai";
-import { AiFillLike } from "react-icons/ai";
-import { AiFillDislike } from "react-icons/ai";
-
-
+import { FaThumbsUp } from "react-icons/fa";
+import { FaThumbsDown } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
+import Loader from "./Loader";
 
 
 interface user{
@@ -42,9 +40,16 @@ interface owner{
   rooms: {_id:string}[]
 }
 
+interface amenities{
+  id: string,
+  name: string,
+  selected: boolean,
+  _id: string
+}
+
 interface roomData{
   _id: string,
-  houseName: string,
+  title: string,
   owner: owner,
   description: string,
   roomsImageUrls: string[],
@@ -60,10 +65,11 @@ interface roomData{
   area: string,
   pincode: string,
   sellerEmail: string,
-  isAc: boolean,
-  isSingleBed: boolean,
-  isKitchen: boolean,
-  freeWifi: boolean,
+  beds: string,
+  baths: string,
+  priceUnit: string,
+  amenities: amenities[],
+  isAvailable: boolean,
   reviews: review[]
 }
 
@@ -354,6 +360,7 @@ function RoomDetails(){
         }
           setIsError(false);
           const newData = res?.data.data.roomDetails;
+          console.log(newData);
           setData(newData);
           
           setIsLoading(false);
@@ -372,8 +379,8 @@ function RoomDetails(){
   }, [isLiked , isSaved , isDisliked]);
 
     return <>
-    <div className="text-white left-0 right-0  px-6 md:px-14 lg:px-20 top-0 z-50 h-auto w-full relative bg-[#fab1a0] ">
-        <X onClick={redirect}  className="cursor-pointer text-black absolute right-2 top-2 hover:border-2 hover:border-black rounded-md "/>
+    <div className="text-white  left-0 right-0   top-0 z-50 h-auto w-full relative bg-white ">
+        
         {
           isError ? 
           <div className="w-full h-screen flex flex-col items-center justify-center text-black text-xl font-bold">
@@ -384,148 +391,20 @@ function RoomDetails(){
           <>
           {
             isLoading ? 
-            <>
-              <div className="flex items-center justify-end pt-10  ">
-                <button className="bg-gray-900 text-gray-900 px-4 py-2 rounded-xl  ">save</button>
-              </div>
-              
-
-              {/**  mobile view  */}
-              <div className="h-auto py-8 my-8">
-              <Swiper
-              slidesPerView={1} // Default for small screens
-              spaceBetween={30}
-              pagination={{
-                clickable: true,
-              }}
-              breakpoints={{
-                640: {
-                  slidesPerView: 2, // For small screens (sm)
-                },
-                768: {
-                  slidesPerView: 3, // For medium screens (md)
-                },
-                1024: {
-                  slidesPerView: 4, // For large screens (lg)
-                },
-              }}
-              modules={[Pagination]}
-              className="mySwiper"
-                >
-                  <SwiperSlide >
-                      <div className="bg-gray-900 relative rounded-md h-[300px] ">
-                        
-                      </div>
-                  </SwiperSlide>
-                </Swiper>
-          
-              </div>
-
-              <div className="flex flex-col md:flex-row items-center justify-between gap-4 mt-4">
-                  <div className="w-full md:w-1/2 ">
-                      <div className="bg-gray-900 h-4 rounded-md w-1/2  "></div>
-                      <div className="bg-gray-900 h-3 rounded-md w-1/3 mt-3"></div>
-                      <div className="flex items-center justify-between gap-3 border-t-2 border-b-2 border-gray-900 py-2 px-2 my-8">
-                          <div className="rounded-full border-2 border-gray-900 h-12 w-12 flex items-center justify-center bg-gray-900"></div>
-                          <div>
-                              <p className="h-4 rounded-md w-[150px] bg-gray-900"></p>
-                              <p className="h-2 rounded-md w-[110px] bg-gray-900 mt-3"></p>
-                          </div>
-                      </div>
-                  </div>
-                  <div className="w-full md:w-1/2 flex items-center justify-center cursor-pointer">
-                      <div className="bg-gray-800 px-10 py-6 my-4 rounded-md shadow-md shadow-gray-400">
-                          <p className="text-2xl font-semibold flex items-center justify-center gap-1 h-4 w-full bg-gray-900 rounded-md  "> </p>
-                          <p className="my-2 text-[22px] border-b-2 border-gray-800 pb-2 h-3 w-1/2 bg-gray-900 rounded-md "></p>
-                          <ul className="flex flex-col  gap-2 justify-between mt-6">
-                              <li className="flex items-center justify-start gap-2 h-2 w-1/3 bg-gray-900 rounded-md"></li>
-                              <li className="flex items-center justify-start gap-2 h-2 w-1/3 bg-gray-900 rounded-md"></li>
-                              <li className="flex items-center justify-start gap-2 h-2 w-1/3 bg-gray-900 rounded-md"></li>
-                              <li className="flex items-center justify-start gap-2 h-2 w-1/3 bg-gray-900 rounded-md"></li>
-                          </ul>
-                          <div className="bg-gray-900 text-gray-900 h-5 w-full text-center text-xl px-10 py-1 rounded-md cursor-pointer mt-4  "></div>
-                      </div>
-                  </div>
-              </div>
-
-              
-
-              <div className="h-auto py-8 my-8">
-              <Swiper
-              slidesPerView={1} // Default for small screens
-              spaceBetween={30}
-              pagination={{
-                clickable: true,
-              }}
-              breakpoints={{
-                640: {
-                  slidesPerView: 2, // For small screens (sm)
-                },
-                768: {
-                  slidesPerView: 3, // For medium screens (md)
-                },
-                1024: {
-                  slidesPerView: 4, // For large screens (lg)
-                },
-              }}
-              modules={[Pagination]}
-              className="mySwiper"
-                >
-                  <SwiperSlide  >
-                    <div className="h-auto text-white rounded-md  bg-slate-800 px-6 py-5 ">
-                        <div className="flex items-center gap-2 justify-start">
-                            <div className="bg-gray-900 rounded-full h-16 w-16 flex items-center justify-center"></div>
-                            <div className="">
-                                <p className="text-xl font-semibold text-white bg-gray-800 h-3 w-1/2 rounded-md"></p>
-                                <p className="text-gray-300 bg-gray-800 h-3 w-1/2 rounded-md"></p>
-                            </div>
-                        </div>
-
-                        <div className="my-4  text-[18px] h-4 w-1/2 bg-gray-900 rounded-md">
-                            
-                        </div>
-
-                        <div className="text-gray-300 h-2 w-1/3 bg-gray-900 rounded-md">
-                            
-                        </div>
-                    </div>
-                  </SwiperSlide>
-              </Swiper>
-          
-              </div>
-            </>
+            <Loader />
             :
             <>
-              <div className="flex items-center justify-end pt-10  ">
-                {
-                  isSaved ? 
-                  <button onClick={cancelSaveRoom} className="bg-black text-white font-semibold px-4 py-2 rounded-xl text-xl  hover:bg-slate-800 hover:scale-110 transition-all cursor-pointer">Saved</button>
-                  :
-                  <button onClick={saveRoom} className="bg-black text-white font-semibold px-4 py-2 rounded-xl text-xl  hover:bg-slate-800 hover:scale-110 transition-all cursor-pointer">Save</button>
-                }
+              <div className="container mx-auto px-4">
+                <button onClick={redirect} className="cursor-pointer bg-gray-200 rounded-md px-3 py-1 flex items-center justify-start gap-2 text-black"><ArrowLeftIcon size={'20px'}/> Back</button>
               </div>
-              
-
               {/**  mobile view  */}
-              <div className="h-auto py-8 my-8">
+              <div className="bg-[#F3F4F6] ">
+              <div className="h-auto py-8 my-8  container mx-auto px-4">
               <Swiper
               slidesPerView={1} // Default for small screens
-              spaceBetween={30}
-              pagination={{
-                clickable: true,
-              }}
-              breakpoints={{
-                640: {
-                  slidesPerView: 2, // For small screens (sm)
-                },
-                768: {
-                  slidesPerView: 3, // For medium screens (md)
-                },
-                1024: {
-                  slidesPerView: 4, // For large screens (lg)
-                },
-              }}
-              modules={[Pagination]}
+              rewind={true}
+              navigation={true}
+              modules={[Navigation]}
               className="mySwiper"
                 >
               {
@@ -542,89 +421,162 @@ function RoomDetails(){
               </Swiper>
           
               </div>
-
-              <div className="text-black flex pb-6 px-4 md:px-6 lg:px-8 items-center justify-end gap-2 text-right">
-                {
-                  isLiked ?
-                  <AiFillLike onClick={cancelLikeRoom} size={'30px'} className="cursor-pointer"/>
-                  :
-                  <AiOutlineLike onClick={likeRoom} size={'30px'}  className="cursor-pointer"/>
-                }
-                <span className="text-2xl font-semibold">{data?.likes.length}</span>
-
-                {
-                  isDisliked ?
-                  <AiFillDislike onClick={cancelDislikeRoom} size={'30px'} className="cursor-pointer"/>
-                  :
-                  <AiOutlineDislike onClick={dislikeRoom} size={'30px'} className="cursor-pointer"/>
-                }
-                <span className="text-2xl font-semibold">{data?.dislikes.length}</span>
-                
               </div>
 
-              <div className="flex flex-col md:flex-row items-center justify-between gap-4 mt-4">
-                  <div className="w-full md:w-1/2 ">
-                      <div className="text-black text-3xl font-semibold"> {data?.state} , {data?.country} </div>
-                      <div className="text-gray-900 mt-1 text-xl">{data?.address} , {data?.area} , {data?.pincode}</div>
-                      <div className="flex items-center justify-between gap-3 border-t-2 border-b-2 border-black py-2 px-2 my-8">
-                          <div className="rounded-full border-2 border-gray-400 relative h-12 w-12 flex items-center justify-center overflow-hidden">
-                            <div style={{backgroundImage: `url(${data?.owner.userDetails.imageUrl})`, backgroundSize: 'cover', backgroundPosition: 'center'}} className='absolute z-0 inset-0'>
+              {/***   property details   */}
+
+              <div className="py-6 container mx-auto px-4">
+                <div className="container mx-auto px-4">
+                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    {/* Left Column - Main Details */}
+                    <div className="lg:col-span-2 border-r-2 border-gray-200 pr-2" >
+                      <div className="flex justify-between items-start">
+                        <div className="">
+                          <span className="mb-2 px-2 py-1 rounded-xl bg-[#39C0F1]">{data?.type}</span>
+                          <h1 className="text-2xl md:text-3xl font-bold mb-2 mt-4 text-black">{data?.title}</h1>
+                          <div className="flex items-center text-gray-600 mb-4">
+                            <MapPin className="w-4 h-4 mr-1" />
+                            <span>
+                              {data?.address}, {data?.city}, {data?.state}. {' '}{data?.pincode}, {data?.country}
+                            </span>
+                          </div>
+                        </div>
+                        <div className="flex space-x-2 md:space-x-6 ">
+                          <button className=" flex items-center justify-center gap-2 text-black" >
+                            {
+                              isSaved ?
+                              <>
+                              <FaHeart onClick={cancelSaveRoom} className="text-black/80 cursor-pointer" size={'22px'} />{data?.saved.length}
+                              </>
+                              :
+                              <>
+                              <Heart onClick={saveRoom} className="w-5 h-5 cursor-pointer" color="black" />{data?.saved.length}
+                              </>
+                            }
+                          </button>
+                          <button className=" flex items-center justify-center gap-2 text-black" >
+                            {
+                              isLiked ?
+                              <>
+                              <FaThumbsUp onClick={cancelLikeRoom} className="text-black/80 cursor-pointer" size={'22px'} /> {data?.likes.length}
+                              </>
+                              :
+                              <>
+                              <ThumbsUp onClick={likeRoom} color="black" className="w-5 h-5 cursor-pointer" /> {data?.likes.length}
+                              </>
+                            }
+                          </button>
+                          <button className=" flex items-center justify-center gap-2 text-black" >
+                            {
+                              isDisliked ?
+                              <>
+                              <FaThumbsDown onClick={cancelDislikeRoom}  size={'22px'} className="text-black/80 cursor-pointer" /> {data?.dislikes.length}
+                              </>
+                              :
+                              <>
+                              <ThumbsDown onClick={dislikeRoom} color="black" className="w-5 h-5 cursor-pointer" />{data?.dislikes.length}
+                              </>
+                            }
+                          </button>
+                        </div>
+                      </div>
+                      
+                      <div className="grid grid-cols-3 gap-4 mb-6 bg-gray-50 rounded-lg p-4">
+                        <div className="text-center">
+                          <div className="flex items-center justify-center">
+                            <Home className="w-5 h-5 text-[#0EA5E9] mr-1" />
+                            <span className="font-medium text-black">{data?.type}</span>
+                          </div>
+                          <span className="text-sm text-gray-600">Type</span>
+                        </div>
+                        <div className="text-center">
+                          <div className="flex items-center justify-center">
+                            <BedDouble className="w-5 h-5 text-[#0EA5E9] mr-1" />
+                            <span className="font-medium text-black">{data?.beds}</span>
+                          </div>
+                          <span className="text-sm text-gray-600">Beds</span>
+                        </div>
+                        <div className="text-center">
+                          <div className="flex items-center justify-center">
+                            <Bath className="w-5 h-5 text-[#0EA5E9] mr-1" />
+                            <span className="font-medium text-black">{data?.baths}</span>
+                          </div>
+                          <span className="text-sm text-gray-600">Baths</span>
+                        </div>
+                      </div>
+                      
+                      <div className="mb-6">
+                        <h2 className="text-xl font-bold mb-3 text-black">Description</h2>
+                        <p className="text-gray-700 leading-relaxed">
+                          {data?.description}
+                        </p>
+                      </div>
+                      
+                      <div className="mb-6">
+                        <h2 className="text-xl font-bold mb-3 text-black">Amenities</h2>
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                          {data?.amenities.map(amenity => (
+                            amenity.selected && 
+                            <div key={amenity.id} className="flex items-center">
+                              <CheckCircle2 className="w-4 h-4 text-[#0EA5E9] mr-2" />
+                              <span className="text-[#1B202E]">{amenity.name}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                      
+                    </div>
+                    
+                    {/* Right Column - Price and Contact */}
+                    <div >
+                      <div className="sticky top-20">
+                        <div className="p-6">
+                          <div className="text-center mb-4">
+                            <div className="text-2xl font-bold text-[#0EA5E9]">
+                              ₹{data?.price}
+                              <span className="text-lg text-gray-500 font-normal">
+                                /{data?.priceUnit}
+                              </span>
+                            </div>
+                            <div className="mt-1 text-black">
+                              {data?.isAvailable ? 'Available Now' : 'Already Booked'}
                             </div>
                           </div>
-                          <div className="text-black ">
-                              <p className="text-2xl font-semibold text-gray-800">Hosted by <span className="text-black font-bold">{data?.owner.name}</span></p>
-                              <p>{data?.owner.experience} YOE ,  <span className="text-blue-600 cursor-pointer hover:text-blue-900 hover:font-bold">{data?.sellerEmail}</span></p>
+                          
+                          <div className="border-t border-b py-4 my-4">
+                            <div className="flex items-center mb-3">
+                              <img 
+                                src={data?.owner.userDetails.imageUrl} 
+                                alt={data?.owner.name}
+                                className="w-10 h-10 rounded-full object-cover mr-3"
+                              />
+                              <div>
+                                <h3 className="font-medium text-lg text-black">{data?.owner.name}</h3>
+                                <p className="text-sm text-gray-600">Property Owner</p>
+                              </div>
+                            </div>
                           </div>
+                          
+                          <div className="space-y-3">
+                            <button className="w-full bg-[#0EA5E9] hover:bg-[#0C4A6E] flex items-center justify-center py-2 rounded-md cursor-pointer">
+                              <Mail className="mr-2 h-4 w-4" />
+                              {data?.sellerEmail}
+                            </button>
+                            <button className="w-full bg-[#0EA5E9] hover:bg-[#0C4A6E] text-center py-2 rounded-md cursor-pointer">
+                              Book Now
+                            </button>
+                            
+                          </div>
+                        </div>
                       </div>
+                    </div>
                   </div>
-                  <div className="w-full md:w-1/2 flex items-center justify-center cursor-pointer hover:scale-105 ">
-                      <div className="bg-white text-black px-10 py-6  rounded-md shadow-md  relative shadow-gray-400">
-                          <p className="text-2xl font-bold flex items-start  gap-1  "> <IndianRupee size={"22px"} className="top-8 left-9 absolute text-bold" /> <span className="text-2xl ml-5 mt-0.5">{data?.price}/Month</span></p>
-                          <p className="my-2 text-2xl font-semibold border-b-2 border-black mt-6 pb-2">Facilities :</p>
-                          <ul className="flex flex-col  gap-2 justify-between mt-4">
-                              <li className="flex items-center justify-start gap-2 text-xl"> <AirVent className="text-black" /> 
-                                {
-                                  data?.isAc ? 
-                                  <p className="">AC available</p>
-                                  :
-                                  <p className="line-through">AC available</p>
-                                }
-                              </li>
-                              <li className="flex items-center justify-start gap-2 text-xl">  <Bed className="text-black" />
-                                {
-                                  data?.isSingleBed ? 
-                                  <p>Single Bed available</p>
-                                  :
-                                  <p className="line-through">Single Bed available</p>
-                                }
-                               </li>
-                              <li className="flex items-center justify-start gap-2 text-xl"> <CookingPot className="text-black" />
-                                {
-                                  data?.isKitchen ? 
-                                  <p>Kitchen available</p>
-                                  :
-                                  <p className="line-through">Kitchen available</p>
-                                }
-                               </li>
-                              <li className="flex items-center justify-start gap-2 text-xl"> <Wifi className="text-black" /> 
-                                {
-                                  data?.freeWifi ? 
-                                  <p>Free Wi-fi </p>
-                                  :
-                                  <p className="line-through">Free Wi-fi </p>
-                                }
-                              </li>
-                          </ul>
-                          <div className="bg-pink-600 text-white text-center text-xl px-10 py-1  rounded-md cursor-pointer mt-8 font-semibold hover:bg-red-800 ">Book</div>
-                      </div>
-                  </div>
+                </div>
               </div>
 
-              <div>
-                  <p className="text-black font-medium text-xl my-8 ">{data?.description}</p>
-              </div>
-
-              <div className="h-auto py-12 ">
+              {/**   review section    */}
+ 
+              <div className="h-auto py-12 container mx-auto px-4 ">
               {
                 data?.reviews.length === 0 ?
                 <div className="w-full h-auto flex items-center justify-center">

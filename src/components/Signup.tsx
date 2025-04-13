@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import axios from "axios";
-import { X } from "lucide-react";
+import { Trash2, Upload, X } from "lucide-react";
 import { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -190,44 +190,90 @@ function Signup(){
         }
     }
 
-    return <div className="h-auto min-h-screen w-full bg-[#fab1a0]  text-black font-semibold text-xl flex items-center justify-center py-15">
-    <div className={`relative  bg-[#FEA47F] shadow-lg shadow-gray-400    w-[300px] md:w-[400px] lg:w-[600px] flex px-6 py-4 md:py-6 lg:py-8 rounded-xl  flex-col `}>
+    function removeImage () {
+        setImage(null);
+        setPreview("");
+      };
+
+    return <div className="h-auto min-h-screen w-full bg-[#F9FAFB]  text-black font-semibold text-lg flex items-center justify-center py-15">
+    <div className={`relative  bg-white shadow-lg shadow-gray-300  w-[310px] sm:w-[360px] md:w-[400px] lg:w-[600px] flex px-6 py-4 md:py-6 lg:py-8 rounded-xl  flex-col `}>
         
         <X  onClick={redirect}  className=" cursor-pointer absolute right-5 hover:border-2 hover:border-black rounded-md text-black"/> 
         
-        <h2 className="text-4xl text-black  font-semibold mt-[4vh] text-center ">sign up</h2>
+        <h2 className="text-3xl text-[#0EA5E9] font-semibold mt-[4vh] text-center ">sign up</h2>
 
         <div className="mt-[8vh] ">
-            <div className="relative">
-                <p>UserName : </p>
-                <input type="text" ref={userNameRef} placeholder="Enter your UserName" className={`rounded-xl shadow-sm shadow-gray-500 text-white border-none bg-slate-900 focus:outline-blue-500 w-full my-5 h-[40px] px-4  ${isUserNameExist ? "focus:outline-red-600" : "" } `} />
+            <div className="relative text-sm md:text-lg my-2">
+                <p>UserName : * </p>
+                <input type="text" ref={userNameRef} placeholder="Enter your UserName" className={`rounded-xl border-2 border-gray-300 text-black  focus:outline-[#0EA5E9] w-full mb-3 mt-1 h-[40px] px-4  ${isUserNameExist ? "focus:outline-red-600" : "" } `} />
                 {
                     isUserNameExist && <div className="absolute text-red-500 right-1 -bottom-1">* UserName already exist</div>
                 }
             </div>
-            <div className="relative">
-                <p>Email : </p>
-                <input type="email" ref={emailRef} placeholder="Enter your Email" className={`rounded-xl shadow-sm shadow-gray-500 text-white border-none bg-slate-900 focus:outline-blue-500 w-full my-5 h-[40px] px-4  ${isEmailExist ? "focus:outline-red-600" : "" } `} />
+            <div className="relative text-sm md:text-lg my-2">
+                <p>Email : * </p>
+                <input type="email" ref={emailRef} placeholder="Enter your Email" className={`rounded-xl border-2 border-gray-300 text-black  focus:outline-[#0EA5E9] w-full mb-3 mt-1 h-[40px] px-4  ${isEmailExist ? "focus:outline-red-600" : "" } `} />
                 {
                     isEmailExist && <div className="absolute text-red-500 right-1 -bottom-1">* Email already exist</div>
                 }
             </div>
-            <p>Pasword : </p>
-            <input type="password" ref={passwordRef} placeholder="Enter your password" className="rounded-xl shadow-sm shadow-gray-500  text-white border-none bg-slate-900 focus:outline-blue-500 w-full my-5 h-[40px] px-4  " />
-            <p>Country : </p>
-            <input type="text" ref={countryRef} placeholder="Enter your country" className="rounded-xl  shadow-sm shadow-gray-500 text-white border-none bg-slate-900 focus:outline-blue-500 w-full my-5 h-[40px] px-4  " />
-            <p>UserImage :  </p>
-            <input type="file" accept="images/*"  onChange={changeImage}  className="rounded-xl  shadow-sm shadow-gray-500 text-white border-none bg-slate-900 focus:outline-blue-500 w-full my-5 h-[40px] px-4  cursor-pointer"  />
-            {
-                preview && <img src={preview} alt="Preview" className="max-w-[200px]" />
-            }
-            
+            <div className="mt-2 text-sm md:text-lg">
+            <p>Pasword : * </p>
+            <input type="password" ref={passwordRef} placeholder="Enter your password" className="rounded-xl border-2 border-gray-300 text-black  focus:outline-[#0EA5E9] w-full mb-3 mt-1 h-[40px] px-4  " />
+            </div>
+            <div className="mt-2 text-sm md:text-lg">
+            <p>Country : * </p>
+            <input type="text" ref={countryRef} placeholder="Enter your country" className="rounded-xl border-2 border-gray-300 text-black  focus:outline-[#0EA5E9] w-full mb-3 mt-1 h-[40px] px-4  " />
+            </div>
+            <p className="my-2 text-sm md:text-lg">UserImage : * </p>
+
+            <div className="mt-2 ">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                    {/* Image previews */}
+                    {
+                        preview !== "" && 
+                        <div className="relative">
+                            <img
+                            src={preview}
+                            alt={`Image preview `}
+                            className="h-24 w-full object-cover rounded-md"
+                            />
+                            <button
+                            type="button"
+                            onClick={removeImage}
+                            className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1"
+                            >
+                            <Trash2 className="h-4 w-4 cursor-pointer" />
+                            </button>
+                        </div>
+                    }
+                </div>
+
+                <div className="mt-6 text-sm md:text-lg">
+                    {/* Upload button */}
+                    {image === null && (
+                    <label className="h-24 border-2 border-dashed border-gray-300 rounded-md flex flex-col items-center justify-center cursor-pointer hover:bg-gray-50">
+                        <Upload className="h-6 w-6 text-gray-400 mb-1" />
+                        <span className="text-sm md:text-lg text-gray-500">Add Photo</span>
+                        <input
+                        type="file"
+                        id="photos"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={changeImage}
+                        multiple
+                        />
+                    </label>
+                    )}
+                </div>
+                </div>
         </div> 
-        <span className="mt-2 text-right cursor-pointer text-black">Already have an account ? <Link to={"/signin"} className="text-blue-900"> sign in</Link> </span>
+
+        <span className="mt-4 text-right font-medium text-sm md:text-[18px] cursor-pointer text-black">Already have an account ? <Link to={"/signin"} className="text-[#0EA5E9]"> sign in</Link> </span>
 
 
 
-        <button className="bg-black  text-white rounded-2xl font-bold text-xl px-8 py-1 mt-[6vh] cursor-pointer hover:bg-slate-950 hover:scale-105"
+        <button className="bg-[#0EA5E9] mx-4 text-white rounded-2xl font-bold text-sm md:text-lg px-8 py-1 mt-[6vh] cursor-pointer hover:bg-[#0C4A6E] "
         onClick={submitSignupForm}>
             {
                 isLoading ? "Submitting..." : "Submit"

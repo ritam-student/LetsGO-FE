@@ -32,9 +32,15 @@ interface owner{
     rooms: {_id:string}[]
 }
 
+interface amenities{
+    id: string,
+    name: string,
+    selected: boolean
+}
+
 interface roomData{
     _id: string,
-    houseName: string,
+    title: string,
     owner: owner,
     description: string,
     roomsImageUrls: string[],
@@ -50,10 +56,11 @@ interface roomData{
     area: string,
     pincode: string,
     sellerEmail: string,
-    isAc: boolean,
-    isSingleBed: boolean,
-    isKitchen: boolean,
-    freeWifi: boolean,
+    beds: string,
+    baths: string,
+    priceUnit: string,
+    amenities: amenities[],
+    isAvailable: boolean,
     reviews: {_id:string}[]
 }
 
@@ -131,15 +138,18 @@ function RoomCardsSection({path}: roomcardSection){
     
         {
             isLoading ? 
-            <div className="text-black flex items-center justify-center text-2xl font-semibold">Loading Rooms Data....</div>
+            <div className="text-black flex items-center justify-center text-2xl font-semibold my-6">Loading Rooms Data......</div>
             :
-            <div className=" flex md:flex-row flex-col flex-wrap  items-center justify-evenly gap-6">
-                { 
-                    data.map((data) => {
-                        return <Roomcard key={data._id} data={data}/>
-                    })
-                }
-            </div>
+            data.length === 0 || data === undefined || data === null ?
+                <div className="text-[#0EA5E9] flex items-center justify-center text-2xl font-semibold my-6">Something went wrong, Please refresh </div>
+                :
+                <div className=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3   flex-wrap py-6  gap-6 ">
+                    {
+                        data.map((data) => {
+                            return <Roomcard key={data._id} data={data}/>
+                        })
+                    }
+                </div>
         }
     </>
 }

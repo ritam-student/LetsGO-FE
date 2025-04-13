@@ -113,36 +113,36 @@ function ForgetPassword(){
     }
 
 
-    return <div className="bg-[#fab1a0] text-black font-semibold flex items-center justify-center w-full h-screen">
-    <div className="relative bg-[#FEA47F] h-auto w-[280px] md:w-[400px] lg:w-[600px] flex px-4 md:px-6 lg:px-8 py-8 rounded-xl  flex-col">
+    return <div className="h-auto min-h-screen w-full text-black font-semibold text-lg flex items-center justify-center bg-[#F9FAFB] py-15 ">
+    <div className="relative bg-white shadow-lg shadow-gray-300  w-[310px] sm:w-[360px] md:w-[400px] lg:w-[600px] flex px-6 py-4 md:py-6 lg:py-8 rounded-xl  flex-col">
         
         <X  onClick={redirect}  className=" cursor-pointer absolute right-5 hover:border-2 hover:border-black rounded-md text-black "/> 
         
-        <h2 className="text-3xl text-black  font-bold mt-[5vh] text-center  ">Forget Password</h2>
+        <h2 className="text-xl md:text-3xl text-[#0EA5E9] font-semibold mt-[4vh] text-center ">Forget Password</h2>
 
         <div className="mt-[4vh] ">
-            <div className="relative">
-                <p>Email : </p>
-                <input type="email" ref={emailRef} placeholder="Enter your email" className={`rounded-xl shadow-sm shadow-gray-500 text-white border-none bg-slate-900 focus:outline-blue-500 w-full my-5 h-[40px] px-4 ${notPasswordMatch? "focus:outline-red-500" : ""} `} />
+            <div className="relative text-sm md:text-lg my-2">
+                <p>Email : * </p>
+                <input type="email" ref={emailRef} placeholder="Enter your email" className={`rounded-xl border-2 border-gray-300 text-black  focus:outline-[#0EA5E9] w-full mb-3 mt-1 h-[40px] px-4 ${notPasswordMatch? "focus:outline-red-500" : ""} `} />
             </div>
-            <div className="relative">
-                <p>New password : </p>
-                <input type="password" ref={newPasswordRef} placeholder="Enter your new password" className={`rounded-xl shadow-sm shadow-gray-500 text-white border-none bg-slate-900 focus:outline-blue-500 w-full my-5 h-[40px] px-4 ${notPasswordMatch? "focus:outline-red-500" : ""} `} />
+            <div className="relative text-sm md:text-lg my-2">
+                <p>New password : * </p>
+                <input type="password" ref={newPasswordRef} placeholder="Enter your new password" className={`rounded-xl border-2 border-gray-300 text-black  focus:outline-[#0EA5E9] w-full mb-3 mt-1 h-[40px] px-4 ${notPasswordMatch? "focus:outline-red-500" : ""} `} />
             </div>
-            <div className="relative">
-                <p>Confirm pasword : </p>
-                <input type="password" ref={confirmPasswordRef} placeholder="Enter your new password" className={`rounded-xl text-white border-none bg-slate-900 focus:outline-blue-500 w-full my-5 h-[40px] px-4  ${notPasswordMatch? "focus:outline-red-500" : ""} `} />
+            <div className="relative text-sm md:text-lg my-2">
+                <p>Confirm pasword : * </p>
+                <input type="password" ref={confirmPasswordRef} placeholder="Enter your new password" className={`rounded-xl border-2 border-gray-300 text-black  focus:outline-[#0EA5E9] w-full mb-3 mt-1 h-[40px] px-4  ${notPasswordMatch? "focus:outline-red-500" : ""} `} />
                 {
                     notPasswordMatch && <div className="absolute text-red-500 text-[18px]  right-1 -bottom-2">* Password doesn't matched</div>
                 }
             </div>
         </div>
 
-        <Link to={"/signin"} className="text-right text-blue-800 cursor-pointer block mt-3" >sign in ?</Link>
+        <Link to={"/signin"} className="text-right text-sm md:text-lg text-[#0EA5E9] cursor-pointer block mt-2" >sign in ?</Link>
 
 
 
-        <button className="bg-black hover:bg-slate-950 hover:scale-105 text-white rounded-xl font-semibold text-xl px-8 py-1 mt-[5vh] cursor-pointer  "
+        <button className="bg-[#0EA5E9] mx-4 text-sm md:text-lg text-white rounded-2xl font-bold  px-8 py-1 mt-[6vh] cursor-pointer hover:bg-[#0C4A6E] "
         onClick={submitForgetPasswordForm}>
             {
                 isLoading ? "Changing..." : "Change"

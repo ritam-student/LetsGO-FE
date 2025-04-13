@@ -161,38 +161,38 @@ function HostForm(){
 
     const [isLoading , setIsLoading] = useState(false);
    return <>
-   <div className="h-auto py-20 bg-[#fab1a0] w-full flex items-center justify-center text-black">
+   <div className="min-h-screen h-auto py-15 bg-[#F9FAFB] w-full flex items-center justify-center text-black">
 
-        <div className=" relative w-[300px] md:w-[450px] lg:w-[520px] rounded-xl shadow-lg shadow-gray-400  px-8 py-10 flex gap-4 justify-start flex-col bg-[#FEA47F] ">
+        <div className=" relative bg-white shadow-lg shadow-gray-300  w-[310px] sm:w-[360px] md:w-[400px] lg:w-[600px] flex px-6 py-4 md:py-6 lg:py-8 rounded-xl  flex-col ">
             <X  onClick={redirect}  className=" cursor-pointer absolute right-5 hover:border-2 hover:border-black rounded-md text-balck "/> 
         
-            <h2 className="text-center text-2xl font-bold my-9">Become a Host</h2>
-            <div className="">
-            <p className="text-xl mt-3">Name : </p>
-            <input type="text" ref={nameRef}  placeholder="Enter your full name" className="rounded-xl shadow-sm shadow-gray-500  text-white border-none bg-slate-900 focus:outline-blue-500 w-full my-2 h-[40px] px-4  " />
+            <h2 className="text-3xl text-[#0EA5E9] font-semibold mt-[4vh] text-center ">Become a Host</h2>
+            <div className="mt-[8vh]">
+            <p className="text-sm md:text-lg mt-3">Name : </p>
+            <input type="text" ref={nameRef}  placeholder="Enter your full name" className="rounded-xl border-2 border-gray-300 text-black  focus:outline-[#0EA5E9] w-full mb-3 mt-1 h-[40px] px-4  " />
             </div>
             <div className="">
-            <p className="text-xl mt-3">Years of Experience : </p>
-            <input type="text" ref={YOERef}  placeholder="Enter your years of experience" className="rounded-xl shadow-sm shadow-gray-500  text-white border-none bg-slate-900 focus:outline-blue-500 w-full my-2 h-[40px] px-4  " />
+            <p className="text-sm md:text-lg mt-3">Years of Experience : </p>
+            <input type="text" ref={YOERef}  placeholder="Enter your years of experience" className="rounded-xl border-2 border-gray-300 text-black  focus:outline-[#0EA5E9] w-full mb-3 mt-1 h-[40px] px-4 " />
             </div>
 
             <div>
-                <p className="text-xl mt-3">state :</p>
-                <input type="text" ref={stateRef} placeholder="Enter your state" className="rounded-xl shadow-sm shadow-gray-500  text-white border-none bg-slate-900 focus:outline-blue-500 w-full my-2 h-[40px] px-4  " />
+                <p className="text-sm md:text-lg mt-3">state :</p>
+                <input type="text" ref={stateRef} placeholder="Enter your state" className="rounded-xl border-2 border-gray-300 text-black  focus:outline-[#0EA5E9] w-full mb-3 mt-1 h-[40px] px-4  " />
             </div>
 
             <div>
-                <p className="text-xl mt-3">city :</p>
-                <input type="text" ref={cityRef}  placeholder="Enter your city" className="rounded-xl shadow-sm shadow-gray-500  text-white border-none bg-slate-900 focus:outline-blue-500 w-full my-2 h-[40px] px-4  " />
+                <p className="text-sm md:text-lg mt-3">city :</p>
+                <input type="text" ref={cityRef}  placeholder="Enter your city" className="rounded-xl border-2 border-gray-300 text-black  focus:outline-[#0EA5E9] w-full mb-3 mt-1 h-[40px] px-4  " />
             </div>
 
             <div>
-                <p className="text-xl mt-3">pincode :</p>
-                <input type="text" ref={pincodeRef}  placeholder="Enter your pincode" className="rounded-xl shadow-sm shadow-gray-500  text-white border-none bg-slate-900 focus:outline-blue-500 w-full my-2 h-[40px] px-4  " />
+                <p className="text-sm md:text-lg  mt-3">pincode :</p>
+                <input type="text" ref={pincodeRef}  placeholder="Enter your pincode" className="rounded-xl border-2 border-gray-300 text-black  focus:outline-[#0EA5E9] w-full mb-3 mt-1 h-[40px] px-4  " />
             </div>
 
 
-            <button onClick={submitForm} className="bg-black hover:bg-slate-800 text-white rounded-2xl font-bold text-xl px-8 py-1 mt-[6vh] cursor-pointer">
+            <button onClick={submitForm} className="bg-[#0EA5E9] mx-4 text-sm md:text-lg text-white rounded-2xl font-bold  px-8 py-1 mt-[6vh] cursor-pointer hover:bg-[#0C4A6E]">
                 {
                     isLoading ? "Submitting..." : "Submit"
                 }

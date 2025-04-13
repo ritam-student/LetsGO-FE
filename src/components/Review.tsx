@@ -26,9 +26,15 @@ interface user{
     rooms: {_id:string}[]
   }
   
+  interface amenities{
+    id: string,
+    name: string,
+    selected: boolean
+  }
+  
   interface roomData{
     _id: string,
-    houseName: string,
+    title: string,
     owner: owner,
     description: string,
     roomsImageUrls: string[],
@@ -44,11 +50,12 @@ interface user{
     area: string,
     pincode: string,
     sellerEmail: string,
-    isAc: boolean,
-    isSingleBed: boolean,
-    isKitchen: boolean,
-    freeWifi: boolean,
-    reviews: {_id:string}[]
+    beds: string,
+    baths: string,
+    priceUnit: string,
+    amenities: amenities[],
+    isAvailable: boolean,
+    reviews: review[]
   }
 
 interface review{
@@ -67,7 +74,7 @@ interface data{
 
 function Review ({review}: data){
     return <>
-    <div className="h-auto text-black rounded-md shadow-xl  shadow-gray-400  bg-white px-6 py-5 ">
+    <div className="h-auto text-black rounded-md  border-2 border-gray-200   bg-[#E5E7EB] px-6 py-5 ">
         <div className="flex items-center gap-4 justify-start">
             <div className="bg-green-500 rounded-full overflow-hidden h-12 w-12 relative flex items-center justify-center">
                 <div style={{backgroundImage: `url(${review.userDetails.imageUrl})`, backgroundSize: 'cover', backgroundPosition: 'center'}} className='absolute z-0 inset-0'>
@@ -75,15 +82,15 @@ function Review ({review}: data){
             </div>
             <div className="">
                 <p className="text-xl font-bold text-black"> {review.name} </p>
-                <p className="text-slate-800"> {review.userDetails.country} </p>
+                <p className="text-gray-600"> {review.userDetails.country} </p>
             </div>
         </div>
 
-        <div className="my-4 mx-1 text-xl flex items-center gap-2  ">
-            <FaStar /> {review.ratings}
+        <div className="my-4 mx-1 text-sm flex items-center gap-1  ">
+            <FaStar size={'15px'} /> {review.ratings}
         </div>
 
-        <div className="text-black text-lg">
+        <div className="text-black text-[17px]">
             {review.content}
         </div>
     </div>

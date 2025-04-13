@@ -121,7 +121,7 @@ function Signin({setUser , setIsLoggedIn} : signin){
                                 text: "Failed to sign in. Please try again later....",
                                 confirmButtonText: "Ok"
                             });
-                            console.log("Failed to sign in. Please try again later.");
+                            
                         }
                         
                     } else {
@@ -168,32 +168,34 @@ function Signin({setUser , setIsLoggedIn} : signin){
 
 
 
-    return <div className="h-auto min-h-screen w-full text-black font-semibold text-xl flex items-center justify-center bg-[#fab1a0] py-16 ">
-    <div className="relative bg-[#FEA47F] shadow-lg shadow-gray-400  w-[300px] md:w-[400px] lg:w-[600px] flex px-9 py-4 md:py-6 lg:py-8 rounded-xl  flex-col">
+    return <div className="h-auto min-h-screen w-full text-black font-semibold text-lg flex items-center justify-center bg-[#F9FAFB] py-15 ">
+    <div className="relative bg-white shadow-lg shadow-gray-300  w-[310px] sm:w-[360px] md:w-[400px] lg:w-[600px] flex px-6 py-4 md:py-6 lg:py-8 rounded-xl  flex-col">
         
         <X  onClick={redirect}  className=" cursor-pointer absolute right-5 hover:border-2 hover:border-black rounded-md text-black "/> 
         
-        <h2 className="text-4xl text-black  font-bold mt-[5vh] text-center  ">sign in</h2>
+        <h2 className="text-3xl text-[#0EA5E9] font-semibold mt-[4vh] text-center ">sign in</h2>
 
-        <div className="mt-[12vh] ">
-            <div className="relative">
-                <p>Email : </p>
-                <input type="email" ref={emailRef} placeholder="Enter your Email" className={`rounded-xl shadow-sm shadow-gray-500 text-white border-none bg-slate-900 focus:outline-blue-500 w-full my-5 h-[40px] px-4  ${isEmailDoesnotExist ? "focus:outline-red-600" : "" } `} />
+        <div className="mt-[8vh] ">
+            <div className="relative text-sm md:text-lg my-2">
+                <p>Email : * </p>
+                <input type="email" ref={emailRef} placeholder="Enter your Email" className={`rounded-xl border-2 border-gray-300 text-black  focus:outline-[#0EA5E9] w-full mb-3 mt-1 h-[40px] px-4  ${isEmailDoesnotExist ? "focus:outline-red-600" : "" } `} />
                 {
                     isEmailDoesnotExist && <div className="absolute text-red-500 right-1 -bottom-1">* Email already exist</div>
                 }
             </div>
-            <p>Pasword : </p>
-            <input type="password" ref={passwordRef} placeholder="Enter your password" className="rounded-xl text-white border-none bg-slate-900 focus:outline-blue-500 w-full my-5 h-[40px] px-4  " />
+            <div className="relative text-sm md:text-lg my-2">
+                <p>Pasword : * </p>
+                <input type="password" ref={passwordRef} placeholder="Enter your password" className="rounded-xl border-2 border-gray-300 text-black  focus:outline-[#0EA5E9] w-full mb-3 mt-1 h-[40px] px-4  " />
+            </div>
         </div>
 
-        <Link to={"/forgetPassword"} className="text-right text-blue-800 cursor-pointer ">Forget Password ?</Link>
-        <span className="text-right cursor-pointer text-black">Don't have an account ? <Link to={"/signup"} className="text-blue-800"> sign up</Link> </span>
+        <Link to={"/forgetPassword"} className="text-right text-[#0EA5E9] cursor-pointer text-sm md:text-lg ">Forget Password ?</Link>
+        <span className="text-right text-sm md:text-lg cursor-pointer text-black">Don't have an account ? <Link to={"/signup"} className="text-[#0EA5E9] text-sm md:text-lg"> sign up</Link> </span>
 
 
 
 
-        <button className="bg-black text-white hover:bg-slate-950 hover:scale-105 rounded-2xl font-bold text-xl px-8 py-1 mt-[10vh] cursor-pointer  "
+        <button className="bg-[#0EA5E9] mx-4 text-sm md:text-lg text-white rounded-2xl font-bold  px-8 py-1 mt-[6vh] cursor-pointer hover:bg-[#0C4A6E] "
         onClick={submitSigninForm}>
             {
                 isLoading ? "Submitting..." : "Submit"

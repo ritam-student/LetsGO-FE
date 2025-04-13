@@ -1,4 +1,4 @@
-import {  Menu, X } from "lucide-react";
+import {  Building2, Hotel, House, Menu, School, X } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -86,23 +86,21 @@ function Navbar({user , setUser, isLoggedIn , setIsLoggedIn} : nav){
         })
     }
 
-    
-
     return (
         <>
-        <div className="flex items-center justify-between bg-[#fab1a0] w-full px-4 md:px-6 lg:px-8 py-3">
+        <div className="container mx-auto px-4 flex items-center justify-between bg-[#FFFFFF] w-full   py-3">
             {/**  left part   */}
             <motion.div variants={fadeIn('up' , 0.4)}
             initial='hidden'
             whileInView={"show"}
             viewport={{once: true}}
-            className="text-black font-bold text-5xl  outline-none ">
+            className="text-[#0EA5E9] font-semibold text-3xl  outline-none ">
                 <Link to={"/"} onClick={() => handleSetActiveLink("/")}>LetsGO</Link>
             </motion.div>
             
             {/**  middle part   */}
             <div className="hidden md:block">
-                <div className="text-2xl gap-9 flex items-center justify-between">
+                <div className="text-lg gap-9 flex items-center justify-between">
                 {
                     menue.map((data , index) => {
                         return <motion.div variants={fadeIn('down' , 0.4 * (index+1))}
@@ -111,7 +109,19 @@ function Navbar({user , setUser, isLoggedIn , setIsLoggedIn} : nav){
                         viewport={{once: true}}
                         ><Link to={data.to} key={index}  
                         onClick={() =>  handleSetActiveLink(data.value)}
-                        className={`relative font-bold after:bottom-0 after:absolute after:left-0 after:h-0.5  after:w-0 hover:after:w-full after:bg-slate-900 after:transition-all ${activeLink === data.value ? "text-black after:w-full" : "text-[#6D214F] hover:after:bg-slate-900 hover:text-black " } `} >
+                        className={`relative font-normal after:bottom-0 after:absolute after:left-0 after:h-0.5  after:w-0 hover:after:w-full after:bg-[#59C1F0] after:transition-all ${activeLink === data.value ? "text-[#59C1F0] after:w-full" : "text-gray-600 hover:after:bg-[#59C1F0] hover:text-[#59C1F0] " } flex items-center justify-center gap-1 `} >
+                            {
+                                data.value === 'Hostel' && <Hotel size={'20px'} />
+                            }
+                            {
+                                data.value === 'Mess' && <School size={'20px'} />
+                            }
+                            {
+                                data.value === 'PG' && <House size={'20px'} />
+                            }
+                            {
+                                data.value === 'Apartment' && <Building2 size={'20px'}  />
+                            }
                         {data.value}
                         </Link></motion.div>
                     } )
@@ -125,7 +135,7 @@ function Navbar({user , setUser, isLoggedIn , setIsLoggedIn} : nav){
             <div className="hidden lg:block">
                 {
                     isLoggedIn ? 
-                    <div className="flex items-center justify-between gap-5 text-xl">
+                    <div className="flex items-center justify-between gap-5 text-lg">
                         <div className="rounded-full border-2 border-[#F97F51] overflow-hidden  h-10 w-10 relative cursor-pointer">
                             <div style={{backgroundImage: `url(${localStorage.getItem('userImgUrl')})`, backgroundSize: 'cover', backgroundPosition: 'center'}} className='absolute z-0 inset-0'></div>
                         </div>
@@ -133,19 +143,19 @@ function Navbar({user , setUser, isLoggedIn , setIsLoggedIn} : nav){
                         initial='hidden'
                         whileInView={"show"}
                         viewport={{once: true}}
-                        ><button className="bg-pink-800 text-white rounded-2xl  font-bold  cursor-pointer hover:bg-slate-950 hover:scale-105 px-3 py-2"
+                        ><button className="bg-white text-black rounded-md border-[1px] border-gray-300  cursor-pointer hover:bg-[#59C1F0] hover:text-white hover:border-white hover:scale-105 px-3 py-1"
                         onClick={signout}
                         >Sign out</button></motion.div>
                     </div>
                     : 
-                    <div className="flex items-center justify-between gap-5 text-xl">
+                    <div className="flex items-center justify-between gap-3 text-lg">
                         <motion.div
                         variants={fadeIn('right' , 1.6)}
                         initial='hidden'
                         whileInView={"show"}
                         viewport={{once: true}}
                         >
-                            <Link to={"/signup"} className="bg-pink-800 text-white rounded-2xl  font-bold  cursor-pointer hover:bg-slate-950 hover:scale-105 px-3 py-2"
+                            <Link to={"/signup"} className="bg-white text-black rounded-md border-[1px] border-gray-300   cursor-pointer hover:bg-[#59C1F0] hover:text-white hover:border-white hover:scale-105 px-3 py-1"
                         >Sign up</Link>
                         </motion.div>
 
@@ -155,7 +165,7 @@ function Navbar({user , setUser, isLoggedIn , setIsLoggedIn} : nav){
                         whileInView={"show"}
                         viewport={{once: true}}
                         >
-                            <Link to={"/signin"} className="bg-pink-800 text-white rounded-2xl  font-bold  cursor-pointer hover:bg-slate-950 hover:scale-105 px-3 py-2"
+                            <Link to={"/signin"} className="bg-[#59C1F0] hover:bg-[#0C4A6E] flex items-center justify-center text-white rounded-lg    cursor-pointer transition-all hover:scale-105 px-3 py-1"
                         >Sign in</Link></motion.div>
                     </div>
                 }
@@ -185,19 +195,32 @@ function Navbar({user , setUser, isLoggedIn , setIsLoggedIn} : nav){
             <div className="">
                 {/** mobile device  */}
                 <div className="block md:hidden transition-all">
-                    <div className="relative w-full flex flex-col items-center justify-between  bg-[#FEA47F] text-black text-xl font-semibold gap-3">
+                    <div className="relative w-full flex flex-col items-center justify-between  bg-white  text-md font-medium gap-4">
                         <div className="w-full flex flex-col py-2 px-4">
                             
                             
                             {
                                 menue.map((data , i) => (
-                                    <Link key={i} to={data.to} onClick={() => setDropDownOpen(s => !s)}  className=" hover:border-b-2 hover:border-black hover:bg-[#fab1a0] py-1 px-2 rounded-xl  cursor-pointer transition-all">
+                                    <Link key={i} to={data.to} onClick={() => setDropDownOpen(s => !s)}  className=" bg-white text-gray-600 hover:bg-gray-50/50   hover:text-[#59C1F0]  py-1 px-2   cursor-pointer transition-all ">
                                         <motion.div
                                         variants={fadeIn('up' , 0.4 * (i+1))}
                                         initial='hidden'
                                         whileInView={"show"}
                                         viewport={{once: true}}
-                                        ><button>{data.value}</button></motion.div>
+                                        ><button className="flex items-center justify-start gap-1">
+                                            {
+                                                data.value === 'Hostel' && <Hotel  />
+                                            }
+                                            {
+                                                data.value === 'Mess' && <School  />
+                                            }
+                                            {
+                                                data.value === 'PG' && <House  />
+                                            }
+                                            {
+                                                data.value === 'Apartment' && <Building2   />
+                                            }
+                                            {data.value}</button></motion.div>
                                     </Link>
                                 ))
                             }
@@ -205,28 +228,32 @@ function Navbar({user , setUser, isLoggedIn , setIsLoggedIn} : nav){
                             {
                                 isLoggedIn ? 
                                 <div>
-                                    <div onClick={signout}
-                                    className=" hover:border-b-2 hover:border-black hover:bg-[#fab1a0] py-1 px-2 cursor-pointer rounded-xl transition-all">
-                                        <motion.div
-                                        variants={fadeIn('up' , 1.6)}
-                                        initial='hidden'
-                                        whileInView={"show"}
-                                        viewport={{once: true}}
-                                        ><button>Sign out</button></motion.div>
+                                    <div className="w-full h-[1px] my-3 bg-slate-300 "></div>
+                                        <div onClick={signout}
+                                        className=" bg-white text-[#59C1F0]    hover:text-white  hover:bg-[#59C1F0]  py-1 px-2   cursor-pointer transition-all">
+                                            <motion.div
+                                            variants={fadeIn('up' , 1.6)}
+                                            initial='hidden'
+                                            whileInView={"show"}
+                                            viewport={{once: true}}
+                                            ><button>Sign out</button></motion.div>
+                                        </div>
                                     </div>
-                                </div>
                                 :
-                                <div className="flex flex-col">
-                                    <Link to={"/signup"} className=" hover:border-b-2 hover:border-black hover:bg-[#fab1a0] py-1 px-2 cursor-pointer rounded-xl transition-all">
+                                <div className="flex flex-col gap-4">
+                                    <div className="w-full h-[1px] my-3 bg-slate-300 "></div>
+                                    <Link to={"/signup"} >
                                         <motion.div
+                                        className=" bg-white border-[1px] border-gray-200 rounded-lg  flex items-center justify-center text-gray-700    hover:bg-[#59C1F0] hover:text-white py-1 px-2   cursor-pointer transition-all"
                                         variants={fadeIn('up' , 1.6)}
                                         initial='hidden'
                                         whileInView={"show"}
                                         viewport={{once: true}}
                                         ><button>Sign up</button></motion.div>
                                     </Link>
-                                    <Link to={"/signin"} className=" hover:border-b-2 hover:border-black hover:bg-[#fab1a0] py-1 px-2  cursor-pointer rounded-xl transition-all">
+                                    <Link to={"/signin"} >
                                         <motion.div
+                                        className=" bg-[#59C1F0] hover:bg-[#0C4A6E] flex items-center justify-center text-white rounded-lg  py-1 px-2   cursor-pointer transition-all"
                                         variants={fadeIn('up' , 2)}
                                         initial='hidden'
                                         whileInView={"show"}
@@ -242,7 +269,7 @@ function Navbar({user , setUser, isLoggedIn , setIsLoggedIn} : nav){
                 
                 {/**  medium device   */}
                 <div className="hidden md:block lg:hidden transition-all  ">
-                    <div className="relative w-full flex flex-col items-center justify-between  bg-[#FEA47F] text-black gap-3 text-xl font-semibold">
+                    <div className="relative w-full flex flex-col items-center justify-between  bg-white  gap-4 text-lg font-medium">
                         <div className="w-full flex flex-col py-2 px-4">
                             
                             
@@ -250,9 +277,9 @@ function Navbar({user , setUser, isLoggedIn , setIsLoggedIn} : nav){
                                 isLoggedIn ?
                                 <div>
                                     <div onClick={signout}
-                                    className=" hover:border-b-2 hover:border-black hover:bg-[#fab1a0] py-1 px-2 rounded-xl cursor-pointer transition-all">
+                                    className=" bg-white border-[1px] border-slate-300 rounded-lg  flex items-center justify-center text-gray-700    hover:bg-[#59C1F0] hover:text-white  py-1 px-2   cursor-pointer transition-all">
                                         <motion.div
-                                        variants={fadeIn('up' , 0.6)}
+                                        variants={fadeIn('right' , 0.4)}
                                         initial='hidden'
                                         whileInView={"show"}
                                         viewport={{once: true}}
@@ -260,18 +287,18 @@ function Navbar({user , setUser, isLoggedIn , setIsLoggedIn} : nav){
                                     </div>
                                 </div>
                                 :
-                                <div className="flex flex-col">
-                                    <Link  to={"/signup"} className=" hover:border-b-2 hover:border-black hover:bg-[#fab1a0] rounded-xl py-1 px-2  cursor-pointer transition-all">
+                                <div className="flex flex-col gap-3 mt-2">
+                                    <Link  to={"/signup"} className=" bg-white border-[1px] border-slate-300 rounded-lg  flex items-center justify-center text-gray-700    hover:bg-[#59C1F0] hover:text-white  py-1 px-2   cursor-pointer transition-all">
                                         <motion.div
-                                        variants={fadeIn('up' , 0.6)}
+                                        variants={fadeIn('left' , 0.2)}
                                         initial='hidden'
                                         whileInView={"show"}
                                         viewport={{once: true}}
                                         ><button>Sign up</button></motion.div>
                                     </Link>
-                                    <Link to={"/signin"} className=" hover:border-b-2 hover:border-black hover:bg-[#fab1a0] rounded-xl py-1 px-2  cursor-pointer  transition-all">
+                                    <Link to={"/signin"} className=" bg-[#59C1F0] hover:bg-[#0C4A6E] flex items-center justify-center text-white rounded-lg  py-1 px-2   cursor-pointer transition-all">
                                         <motion.div
-                                        variants={fadeIn('up' , 1)}
+                                        variants={fadeIn('right' , 0.4)}
                                         initial='hidden'
                                         whileInView={"show"}
                                         viewport={{once: true}}
